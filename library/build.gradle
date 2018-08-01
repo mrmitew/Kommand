@@ -1,0 +1,18 @@
+import dependencies.CommonDependencies
+import dependencies.TestDependencies
+
+apply plugin: 'kotlin'
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation CommonDependencies.kotlin_stdlib_jdk7
+    implementation CommonDependencies.kotlin_coroutines_core
+    implementation TestDependencies.junit
+}
