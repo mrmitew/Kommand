@@ -19,9 +19,8 @@ This allows us to have a class that is not coupled to a particular request and i
 
 # Demonstration
 * See the unit tests in the library project
-* ~See the sample app~ (TODO)
+* See the sample app
 
 # To do
 * Documentation
 * Class diagram
-* Sample app
