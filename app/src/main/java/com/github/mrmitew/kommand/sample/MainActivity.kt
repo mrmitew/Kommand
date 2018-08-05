@@ -69,14 +69,14 @@ class MainActivity : AppCompatActivity() {
 
         vg_root.backgroundColor = ViewWrapper.initialColor
 
-        btn_change_background.setOnSuspendClickListener {
+        btn_change_background.setOnRendezvousClickListener {
             showBusy(true)
             val newColor = getRandomColor()
             cmdInvoker.execute(ChangeBackgroundColor(vg_root, newColor = newColor, oldColor = vg_root.backgroundColor))
             showBusy(false)
         }
 
-        btn_undo.setOnSuspendClickListener {
+        btn_undo.setOnRendezvousClickListener {
             showBusy(true)
             try {
                 cmdInvoker.undo()
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             showBusy(false)
         }
 
-        btn_cancel.setOnSuspendClickListener {
+        btn_cancel.setOnRendezvousClickListener {
             showBusy(true)
             try {
                 cmdInvoker.cancel()
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             showBusy(false)
         }
 
-        btn_redo.setOnSuspendClickListener {
+        btn_redo.setOnRendezvousClickListener {
             showBusy(true)
             try {
                 cmdInvoker.redo()
@@ -129,6 +129,5 @@ class MainActivity : AppCompatActivity() {
             delay((1000..2000).random())
             view.backgroundColor = oldColor
         }
-
     }
 }
