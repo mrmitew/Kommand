@@ -61,6 +61,15 @@ For a complete demonstration, please refer to the sample app and the unit tests 
 * See the unit tests in the library project
 * See the sample app
 
+# Note
+Please note that the `execute()` and `undo()` return `Any`, according to the `Command` interface. Therefore, you can return the output of the request/command back to the caller. However, you would need to type cast from `Any` to your known object.
+
+Example:
+```kotlin
+val result = cmdInvoker.execute(MyCommand(arg1,arg2..))
+doSomethingWith(result as? MyOutputObject)
+```
+
 # To do
 * Documentation
 * Class diagram
