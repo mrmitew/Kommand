@@ -13,6 +13,7 @@ object Versions {
 
     // Common
     const val kotlin = "1.2.51"
+    const val kotlin_serialization = "0.6.0"
     const val kotlin_coroutines = "0.24.0"
     const val kotlin_native = "0.8"
     const val lifecycle = "1.1.1"
@@ -65,6 +66,7 @@ object CommonDependencies {
     const val lifecycle_x_livedata = "androidx.lifecycle:lifecycle-livedata:${Versions.lifecycle_x}"
     const val lifecycle_x_compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle_x}"
     const val kotlin_coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlin_coroutines}"
+    const val kotlin_serialization_runtime = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlin_serialization}"
     const val kotlin_coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlin_coroutines}"
     const val kotlin_ktx = "androidx.core:core-ktx:{${Versions.kotlin_ktx}"
 }

@@ -9,7 +9,7 @@ android {
     buildToolsVersion Versions.buildTools
 
     defaultConfig {
-        applicationId "com.github.mrmitew.kommand"
+        applicationId "com.github.mrmitew.kommand.sample"
         minSdkVersion Versions.min_sdk
         targetSdkVersion Versions.target_sdk
         versionCode Versions.code
@@ -25,15 +25,22 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api CommonDependencies.kotlin_stdlib_jdk7
-    api CommonDependencies.kotlin_coroutines_android
-    api CommonDependencies.kotlin_coroutines_core
+    implementation CommonDependencies.kotlin_stdlib_jdk7
+    implementation CommonDependencies.kotlin_coroutines_android
+    implementation CommonDependencies.kotlin_coroutines_core
 
-    api UiDependencies.appcompat_x
-    api UiDependencies.constraint_layoutx
-    api UiDependencies.design_x
+    implementation project(':library')
+    implementation UiDependencies.appcompat_x
+    implementation UiDependencies.constraint_layoutx
+    implementation UiDependencies.design_x
 
     testImplementation TestDependencies.junit
     androidTestImplementation TestDependencies.android_test_runnerx

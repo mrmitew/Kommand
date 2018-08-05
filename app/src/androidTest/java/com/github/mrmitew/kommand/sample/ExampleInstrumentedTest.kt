@@ -1,4 +1,4 @@
-package com.github.mrmitew.kommand
+package com.github.mrmitew.kommand.sample
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.github.mrmitew.kommand", appContext.packageName)
+        assertEquals("com.github.mrmitew.kommand.sample", appContext.packageName)
     }
 }

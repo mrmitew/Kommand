@@ -1,11 +1,9 @@
 package com.github.mrmitew.kommand
 
-import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.experimental.runBlocking
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.*
-
-fun ClosedRange<Int>.random() = Random().nextInt(endInclusive - start) + start
 
 class KommandTest {
     @Test
@@ -77,20 +75,18 @@ class KommandTest {
     }
 
 
-    data class ColorReceiver(var currentColor: String?) : Command.Receiver
+    data class ColorReceiver(var currentColor: String?)
 
     data class ChangeColorCommand(val colors: Pair<String?, String?>,
                                   private val receiver: ColorReceiver) : Command {
-        override suspend fun execute(): Command {
-//            delay((100..2000).random())
+        override suspend fun execute(): Boolean {
             receiver.currentColor = colors.first
-            return this
+            return true
         }
 
-        override suspend fun undo(): Command {
-//            delay((100..2000).random())
+        override suspend fun undo(): Boolean  {
             receiver.currentColor = colors.second
-            return this
+            return true
         }
     }
 

@@ -1,4 +1,4 @@
-package com.github.mrmitew.kommand
+package com.github.mrmitew.kommand.sample
 
 import org.junit.Test
 

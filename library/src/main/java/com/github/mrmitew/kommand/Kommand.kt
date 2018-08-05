@@ -2,16 +2,16 @@ package com.github.mrmitew.kommand
 
 import java.util.*
 
-class EmptyStackException : RuntimeException()
+open class CommandException : RuntimeException()
+class NothingToUndoException : CommandException()
+class NothingToRedoException : CommandException()
 
 // TODO: Add capacity support
 // TODO: Add logger support
 
 interface Command {
-    suspend fun execute(): Command
-    suspend fun undo(): Command
-
-    interface Receiver
+    suspend fun execute(): Any
+    suspend fun undo(): Any
 
     interface Invoker {
         fun isRedoAvailable(): Boolean
@@ -23,10 +23,10 @@ interface Command {
         fun undoPeek(): Command
         fun redoPeek(): Command
 
-        suspend fun execute(cmd: Command): Command
-        suspend fun undo(): Command
-        suspend fun redo(): Command
-        suspend fun cancel(): Command
+        suspend fun execute(cmd: Command): Any
+        suspend fun undo(): Any
+        suspend fun redo(): Any
+        suspend fun cancel(): Any
     }
 }
 
@@ -40,7 +40,7 @@ class CommandInvokerImpl : Command.Invoker {
     override fun undoPeek(): Command = undoStack.peek()
     override fun redoPeek(): Command = redoStack.peek()
 
-    override suspend fun execute(cmd: Command): Command {
+    override suspend fun execute(cmd: Command): Any {
         val result = cmd.execute()
         undoStack.push(cmd)
         println("Pushed to undo stack: $cmd. Stack size: ${undoStack.size}")
@@ -48,7 +48,7 @@ class CommandInvokerImpl : Command.Invoker {
         return result
     }
 
-    override suspend fun undo(): Command {
+    override suspend fun undo(): Any {
         if (isUndoAvailable()) {
             val cmd = undoStack.pop()
             val result = cmd.undo()
@@ -57,10 +57,10 @@ class CommandInvokerImpl : Command.Invoker {
             return result
         }
 
-        throw EmptyStackException()
+        throw NothingToUndoException()
     }
 
-    override suspend fun redo(): Command {
+    override suspend fun redo(): Any {
         if (isRedoAvailable()) {
             val cmd = redoStack.pop()
             val result = cmd.execute()
@@ -68,10 +68,10 @@ class CommandInvokerImpl : Command.Invoker {
             return result
         }
 
-        throw EmptyStackException()
+        throw NothingToRedoException()
     }
 
-    override suspend fun cancel(): Command {
+    override suspend fun cancel(): Any {
         while (undoStack.size > 1) {
             undoStack.pop()
         }
