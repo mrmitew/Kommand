@@ -4,7 +4,7 @@ _As described in Wikipedia, the command pattern .._
 
 In a nutshell, the Kommand library implements the [command pattern](https://en.wikipedia.org/wiki/Command_pattern) in Kotlin, using Kotlin's [coroutines](https://kotlinlang.org/docs/reference/coroutines.html) to execute suspending command requests.
 
-## What problems does Command pattern solve
+## What problems does the Command pattern solve
 - decoupling of the invoker of a request from a particular request
 - configuring an object that invokes a request with a request
 
