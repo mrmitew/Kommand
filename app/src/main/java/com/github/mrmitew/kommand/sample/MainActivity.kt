@@ -72,7 +72,9 @@ class MainActivity : AppCompatActivity() {
         btn_change_background.setOnRendezvousClickListener {
             showBusy(true)
             val newColor = getRandomColor()
-            cmdInvoker.execute(ChangeBackgroundColor(vg_root, newColor = newColor, oldColor = vg_root.backgroundColor))
+            cmdInvoker.execute(ChangeBackgroundColor(receiver = vg_root,
+                    newColor = newColor,
+                    oldColor = vg_root.backgroundColor))
             showBusy(false)
         }
 
@@ -115,19 +117,19 @@ class MainActivity : AppCompatActivity() {
     private fun getRandomColor() =
             Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))
 
-    class ChangeBackgroundColor(private val view: View,
+    class ChangeBackgroundColor(private val receiver: View,
                                 private val newColor: Int,
                                 private val oldColor: Int) : Command {
         override suspend fun execute() {
             // Simulate some expensive work by delaying the actual execution of the command
             delay((1000..2000).random())
-            view.backgroundColor = newColor
+            receiver.backgroundColor = newColor
         }
 
         override suspend fun undo() {
             // Simulate some expensive work by delaying the actual execution of the command
             delay((1000..2000).random())
-            view.backgroundColor = oldColor
+            receiver.backgroundColor = oldColor
         }
     }
 }
