@@ -21,9 +21,6 @@ interface Command {
     suspend fun undo(): Any
 
     interface Invoker {
-        fun isRedoAvailable(): Boolean
-        fun isUndoAvailable(): Boolean
-
         fun undoCount(): Int
         fun redoCount(): Int
 
@@ -39,7 +36,7 @@ interface Command {
 ```
 
 # Class diagram of Kommand
-(TODO)
+![Class diagram](https://github.com/mrmitew/Kommand/blob/master/design/class-diagram.png "Class diagram")
 
 # Usage
 ```kotlin
@@ -96,4 +93,3 @@ doSomethingWith(result as? MyOutputObject)
 
 # To do
 * Documentation
-* Class diagram
