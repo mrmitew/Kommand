@@ -14,6 +14,30 @@ In a nutshell, the Kommand library implements the [command pattern](https://en.w
 
 This allows us to have a class that is not coupled to a particular request and is independent of how the request is carried out. The execution of a command, on the other hand, is done in a suspending function that may return immediately or suspend until the request is completes once it is triggered.
 
+# Kommand's API
+```kotlin
+interface Command {
+    suspend fun execute(): Any
+    suspend fun undo(): Any
+
+    interface Invoker {
+        fun isRedoAvailable(): Boolean
+        fun isUndoAvailable(): Boolean
+
+        fun undoCount(): Int
+        fun redoCount(): Int
+
+        fun undoPeek(): Command
+        fun redoPeek(): Command
+
+        suspend fun execute(cmd: Command): Any
+        suspend fun undo(): Any
+        suspend fun redo(): Any
+        suspend fun cancel(): Any
+    }
+}
+```
+
 # Class diagram of Kommand
 (TODO)
 
