@@ -7,29 +7,6 @@ class NothingToUndoException : CommandException()
 class NothingToRedoException : CommandException()
 
 // TODO: Add capacity support
-// TODO: Add logger support
-
-interface Command {
-    suspend fun execute(): Any
-    suspend fun undo(): Any
-
-    interface Invoker {
-        fun isRedoAvailable(): Boolean
-        fun isUndoAvailable(): Boolean
-
-        fun undoCount(): Int
-        fun redoCount(): Int
-
-        fun undoPeek(): Command
-        fun redoPeek(): Command
-
-        suspend fun execute(cmd: Command): Any
-        suspend fun undo(): Any
-        suspend fun redo(): Any
-        suspend fun cancel(): Any
-    }
-}
-
 class CommandInvokerImpl : Command.Invoker {
     private val undoStack: Stack<Command> = Stack()
     private val redoStack: Stack<Command> = Stack()
@@ -43,7 +20,6 @@ class CommandInvokerImpl : Command.Invoker {
     override suspend fun execute(cmd: Command): Any {
         val result = cmd.execute()
         undoStack.push(cmd)
-        println("Pushed to undo stack: $cmd. Stack size: ${undoStack.size}")
         redoStack.clear()
         return result
     }
@@ -52,7 +28,6 @@ class CommandInvokerImpl : Command.Invoker {
         if (isUndoAvailable()) {
             val cmd = undoStack.pop()
             val result = cmd.undo()
-            println("Popped from undo stack: $cmd. Stack size: ${undoStack.size}")
             redoStack.push(cmd)
             return result
         }
@@ -82,7 +57,4 @@ class CommandInvokerImpl : Command.Invoker {
 
         return undo()
     }
-
-    override fun isUndoAvailable() = !undoStack.isEmpty()
-    override fun isRedoAvailable() = !redoStack.isEmpty()
 }
