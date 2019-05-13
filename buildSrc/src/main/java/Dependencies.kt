@@ -9,10 +9,10 @@ object Versions {
     const val compile_sdk = 28
     const val min_sdk = 16
     const val target_sdk = 28
-    const val buildTools = "28.0.1"
+    const val buildTools = "28.0.3"
 
     // Common
-    const val kotlin = "1.2.51"
+    const val kotlin = "1.3.10"
     const val kotlin_serialization = "0.6.0"
     const val kotlin_coroutines = "0.24.0"
     const val kotlin_native = "0.8"
