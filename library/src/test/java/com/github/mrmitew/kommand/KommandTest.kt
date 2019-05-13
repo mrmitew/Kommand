@@ -3,7 +3,6 @@ package com.github.mrmitew.kommand
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import java.util.*
 
 class KommandTest {
     @Test
