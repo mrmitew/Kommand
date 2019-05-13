@@ -83,7 +83,7 @@ For a complete demonstration, please refer to the sample app and the unit tests 
 * See the sample app
 
 # Note
-Please note that the `execute()` and `undo()` return `Any`, according to the `Command` interface. Therefore, you can return the output of the request/command back to the caller. However, you would need to type cast from `Any` to your known object.
+Please note that the `execute()` and `undo()` return `Any`, according to the `Command` interface. Therefore, you can return the output of the request/command back to the caller. However, you would need to type cast from `Any` to your known object. Perhaps we can now benefit from (Kotlin contracts)[https://kotlinlang.org/docs/reference/whatsnew13.html] to make a smart cast, but I haven't looked into it yet in depth.
 
 Example:
 ```kotlin
